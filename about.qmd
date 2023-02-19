@@ -16,4 +16,4 @@ about:
 
 ---
 
-I am a senior majoring in Computer Science and Chemistry at Middlebury College. This blog showcases my work from CS0451: Machine Learning.
+testing quarto
