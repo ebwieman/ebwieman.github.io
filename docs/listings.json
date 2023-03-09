@@ -2,6 +2,8 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/penguins.html",
+      "/posts/logistic-regression/logistic-regression-blog.html",
       "/posts/perceptron/perceptron_blog.html",
       "/posts/example-blog-post/index.html"
     ]
