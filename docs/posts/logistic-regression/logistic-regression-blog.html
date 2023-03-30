@@ -242,7 +242,7 @@ background-size: cover;
 </div>
 </div>
 <p>After creating and visualizing some data, we fit it and visualize the loss and accuracy overtime.</p>
-<div class="cell" data-execution_count="12">
+<div class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>LR <span class="op">=</span> LogisticRegression()</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>LR.fit(X, y, <span class="fl">.5</span>, <span class="dv">1000</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -252,13 +252,16 @@ background-size: cover;
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>plt.loglog()</span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>legend <span class="op">=</span> plt.legend()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>legend <span class="op">=</span> plt.legend()</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>xlab <span class="op">=</span> plt.xlabel(<span class="st">"Epochs"</span>)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>ylab <span class="op">=</span> plt.ylabel(<span class="st">"Loss/Accuracy"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <p><img src="logistic-regression-blog_files/figure-html/cell-3-output-1.png" class="img-fluid"></p>
 </div>
 </div>
 <p>We see that as the loss decreases, the accuracy increases, which makes sense. If we run the model numerous times, we see that the amount of time it takes for the model to converge varies, which is largely a result of the initial random weight chosen.</p>
-<div class="cell" data-execution_count="13">
+<div class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> draw_line(w, x_min, x_max):</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  x <span class="op">=</span> np.linspace(x_min, x_max, <span class="dv">101</span>)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  y <span class="op">=</span> <span class="op">-</span>(w[<span class="dv">0</span>]<span class="op">*</span>x <span class="op">+</span> w[<span class="dv">2</span>])<span class="op">/</span>w[<span class="dv">1</span>]</span>
@@ -270,82 +273,84 @@ background-size: cover;
 <span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>xlab <span class="op">=</span> plt.xlabel(<span class="st">"Feature 1"</span>)</span>
 <span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>ylab <span class="op">=</span> plt.ylabel(<span class="st">"Feature 2"</span>)</span>
 <span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>plt.ylim([<span class="op">-</span><span class="dv">3</span>,<span class="dv">3</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="13">
+<div class="cell-output cell-output-display" data-execution_count="3">
 <pre><code>(-3.0, 3.0)</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <p><img src="logistic-regression-blog_files/figure-html/cell-4-output-2.png" class="img-fluid"></p>
 </div>
 </div>
-<div class="cell" data-execution_count="14">
+<div class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>LR.score_history[<span class="op">-</span><span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="14">
-<pre><code>0.915</code></pre>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<pre><code>0.94</code></pre>
 </div>
 </div>
-<p>If we visualize the line drawn by our final weights, we see that it does a very good job of classifying our data. When we print the final accuracy we get 0.915, which seems reasonable for data that is not linearly separable. If we run these cells several times, we see the same line drawn each time, even if the evolution of the loss and accuracy looks different. This suggests that our logistic regression algorithm is always converging to the global minima, even if it doesn’t always take the same amount of time.</p>
+<p>If we visualize the line drawn by our final weights, we see that it does a very good job of classifying our data. When we print the final accuracy we get 0.94, which seems reasonable for data that is not linearly separable. If we run these cells several times, we see the same line drawn each time, even if the evolution of the loss and accuracy looks different. This suggests that our logistic regression algorithm is always converging to the global minima, even if it doesn’t always take the same amount of time.</p>
 </section>
 <section id="changing-the-learning-rate" class="level3">
 <h3 class="anchored" data-anchor-id="changing-the-learning-rate">Changing the learning rate</h3>
-<p>We can alter values of alpha, the learning rate, to make our algorithm converge more quickly. However, if we make our learning rate too large, our algorithm will never converge because it will jump over the minima each time it makes an update. To see this, lets set our learning rate to 40.</p>
-<div class="cell" data-execution_count="15">
+<p>We can alter values of alpha, the learning rate, to make our algorithm converge more quickly. However, if we make our learning rate too large, our algorithm will never converge because it will jump over the minima each time it makes an update. To see this, lets set our learning rate to 50.</p>
+<div class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>LR <span class="op">=</span> LogisticRegression()</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>LR.fit(X, y, <span class="dv">40</span>, <span class="dv">1000</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>LR.fit(X, y, <span class="dv">50</span>, <span class="dv">1000</span>)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>num_steps <span class="op">=</span> <span class="bu">len</span>(LR.loss_history)</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>plt.plot(np.arange(num_steps) <span class="op">+</span> <span class="dv">1</span>, LR.loss_history, label <span class="op">=</span> <span class="st">"loss"</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>plt.plot(np.arange(num_steps) <span class="op">+</span> <span class="dv">1</span>, LR.loss_history)</span>
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co">#plt.plot(np.arange(num_steps) + 1, LR.score_history, label = "accuracy")</span></span>
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>plt.loglog()</span>
 <span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>legend <span class="op">=</span> plt.legend()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>xlab <span class="op">=</span> plt.xlabel(<span class="st">"Epochs"</span>)</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>ylab <span class="op">=</span> plt.ylabel(<span class="st">"Loss"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <p><img src="logistic-regression-blog_files/figure-html/cell-6-output-1.png" class="img-fluid"></p>
 </div>
 </div>
-<p>We can see that when we do this, the algorithm never converges, but instead the loss bounces around between approximately 0.48 and 0.4 loss between epochs 10 and 1000.</p>
+<p>We can see that when we do this, the algorithm never converges, but instead the loss bounces around between approximately 0.38 and 0.39 loss between epochs 100 and 1000.</p>
 </section>
 <section id="logistic-regression-with-stochastic-gradient-descent" class="level3">
 <h3 class="anchored" data-anchor-id="logistic-regression-with-stochastic-gradient-descent">Logistic regression with stochastic gradient descent</h3>
 <p>Next we implement logistic regression with stochastic gradient descent. This function uses the same principal of gradient descent, but it splits the data into batches and performs a weight update for each batch before updating the loss and score. By performing multiple updates within each epoch, the algorithm will likely converge more quickly.</p>
-<div class="cell" data-execution_count="23">
+<div class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>LR <span class="op">=</span> LogisticRegression()</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>LR.fit_stochastic(X, y, <span class="fl">.01</span>, <span class="dv">1000</span>, <span class="dv">10</span>)</span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>num_steps <span class="op">=</span> <span class="bu">len</span>(LR.loss_history)</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>plt.plot(np.arange(num_steps) <span class="op">+</span> <span class="dv">1</span>, LR.loss_history, label <span class="op">=</span> <span class="st">"loss"</span>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>plt.plot(np.arange(num_steps) <span class="op">+</span> <span class="dv">1</span>, LR.loss_history)</span>
 <span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co">#plt.plot(np.arange(num_steps) + 1, LR.score_history, label = "accuracy")</span></span>
 <span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>plt.loglog()</span>
 <span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>legend <span class="op">=</span> plt.legend()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>xlab <span class="op">=</span> plt.xlabel(<span class="st">"Epochs"</span>)</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>ylab <span class="op">=</span> plt.ylabel(<span class="st">"Loss"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <p><img src="logistic-regression-blog_files/figure-html/cell-7-output-1.png" class="img-fluid"></p>
 </div>
 </div>
-<div class="cell" data-execution_count="24">
+<div class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.scatter(X[:,<span class="dv">0</span>], X[:,<span class="dv">1</span>], c <span class="op">=</span> y)</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> draw_line(LR.w, <span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>)</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>xlab <span class="op">=</span> plt.xlabel(<span class="st">"Feature 1"</span>)</span>
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>ylab <span class="op">=</span> plt.ylabel(<span class="st">"Feature 2"</span>)</span>
 <span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>plt.ylim([<span class="op">-</span><span class="dv">3</span>,<span class="dv">3</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="24">
+<div class="cell-output cell-output-display" data-execution_count="14">
 <pre><code>(-3.0, 3.0)</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <p><img src="logistic-regression-blog_files/figure-html/cell-8-output-2.png" class="img-fluid"></p>
 </div>
 </div>
-<div class="cell" data-execution_count="25">
+<div class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>LR.score_history[<span class="op">-</span><span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="25">
-<pre><code>0.915</code></pre>
+<div class="cell-output cell-output-display" data-execution_count="15">
+<pre><code>0.935</code></pre>
 </div>
 </div>
 <p>Our stochastic algorithm also draws the same line, although we need to use a smaller learning rate to allow the algorithm to converge, and we see small fluctuations at higher epochs.</p>
-<div class="cell" data-execution_count="46">
+<div class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>LR <span class="op">=</span> LogisticRegression()</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>LR.fit_stochastic(X, y, </span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>                  max_epochs <span class="op">=</span> <span class="dv">1000</span>, </span>
@@ -363,14 +368,17 @@ background-size: cover;
 <span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>plt.loglog()</span>
 <span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>legend <span class="op">=</span> plt.legend()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>legend <span class="op">=</span> plt.legend()</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>xlab <span class="op">=</span> plt.xlabel(<span class="st">"Epochs"</span>)</span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>ylab <span class="op">=</span> plt.ylabel(<span class="st">"Loss"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <p><img src="logistic-regression-blog_files/figure-html/cell-10-output-1.png" class="img-fluid"></p>
 </div>
 </div>
 <p>When we compare the stochastic versus regular gradient descent, we can see that the stochastic loss decreases more quickly at the beginning, but we see small fluctuations in loss at later timesteps.</p>
 <p>Now lets compare a series of batch sizes and see how it affects how quickly the algorithm converges.</p>
-<div class="cell" data-execution_count="59">
+<div class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>LR <span class="op">=</span> LogisticRegression()</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>LR.fit_stochastic(X, y, <span class="fl">.01</span>, <span class="dv">100</span>, <span class="dv">10</span>)</span>
@@ -395,7 +403,10 @@ background-size: cover;
 <span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>plt.loglog()</span>
 <span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>legend <span class="op">=</span> plt.legend()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>legend <span class="op">=</span> plt.legend()</span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a>xlab <span class="op">=</span> plt.xlabel(<span class="st">"Epochs"</span>)</span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a>ylab <span class="op">=</span> plt.ylabel(<span class="st">"Loss"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <p><img src="logistic-regression-blog_files/figure-html/cell-11-output-1.png" class="img-fluid"></p>
 </div>
